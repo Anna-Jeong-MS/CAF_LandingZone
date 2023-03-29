@@ -13,7 +13,3 @@
 ### Web App
 
 ### DevOps
-
-[Day1](https://github.com/Anna-Jeong-MS/CAF_LandingZone/tree/main/Day1)
-
-[Day2](https://github.com/Anna-Jeong-MS/CAF_LandingZone/tree/main/Day2)
