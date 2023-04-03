@@ -116,7 +116,3 @@ Azure 네트워크 보안 그룹을 사용하여 Azure 가상 네트워크의 Az
     
     [https://learn.microsoft.com/ko-kr/azure/virtual-network/virtual-network-manage-peering?tabs=peering-portal#create-a-peering](https://learn.microsoft.com/ko-kr/azure/virtual-network/virtual-network-manage-peering?tabs=peering-portal#create-a-peering)
     
-
-# 검증 (15m)
-
-### Network Watcher를 통한 트래픽 흐름 검증하기
