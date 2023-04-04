@@ -116,3 +116,38 @@ Azure 네트워크 보안 그룹을 사용하여 Azure 가상 네트워크의 Az
     
     [https://learn.microsoft.com/ko-kr/azure/virtual-network/virtual-network-manage-peering?tabs=peering-portal#create-a-peering](https://learn.microsoft.com/ko-kr/azure/virtual-network/virtual-network-manage-peering?tabs=peering-portal#create-a-peering)
     
+
+# 검증 (15m)
+
+### Network Watcher를 통한 트래픽 흐름 검증하기
+
+  Azure Network Watcher는 Azure 가상 네트워크의 리소스를 모니터링 및 진단하고 메트릭을 보고 그에 대한 로그를 활성화 또는 비활성화하는 도구를 제공합니다. Network Watcher VM(가상 머신), VNet(가상 네트워크), 애플리케이션 게이트웨이, 부하 분산 장치 등 IaaS(서비스로서의 인프라) 제품의 네트워크 상태를 모니터링하고 복구하도록 설계되었습니다.
+
+  ![Untitled](images/Untitled%204.png)
+
+  왼쪽 메뉴에서 토폴로지를 클릭하고 생성한 구독을 선택하고 리소스 그룹에서 hub-spoke을 선택합니다.
+
+  ![Untitled](images/Untitled%205.png)
+
+  연결 모니터 만들기 메뉴를 클릭합니다.
+
+  ![Untitled](images/Untitled%206.png)
+
+- 연결 모니터 이름 : network-connect
+- 지역 : 한국 중부
+
+  테스트 그룹 세부 정보를 아래와 같이 구성하고 테스트 그룹 추가 버튼을 클릭합니다.
+
+- 소스 : SpokeVNet1
+- 대상 : SpokeVNet2
+- 테스트 구성을 아래와 같이 구성합니다.
+
+  ![Untitled](images/Untitled%207.png)
+
+  검토 + 만들기 버튼을 클릭합니다.
+
+  ![Untitled](images/Untitled%208.png)
+
+### 참고 URL
+
+- [https://learn.microsoft.com/ko-kr/azure/architecture/reference-architectures/hybrid-networking/hub-spoke?tabs=cli](https://learn.microsoft.com/ko-kr/azure/architecture/reference-architectures/hybrid-networking/hub-spoke?tabs=cli)
