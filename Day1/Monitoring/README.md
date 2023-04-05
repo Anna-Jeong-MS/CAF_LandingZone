@@ -6,7 +6,7 @@ Landing Zone에서 관리 디자인 Area
 
 ## 시나리오
 
-![Untitled](HoL1%20Monitoring%204d3c8042c01e4737b65478eb5037fa09/Untitled.png)
+![Untitled](CAF_LandingZone/Day1/Monitoring/Images/Untitled%201.png9/Untitled.png)
 
 Microsoft Azure에는 다양한 모니터링 및 보안 관제 서비스가 존재합니다. 각각의 서비스에 대해 알아보고 Landing Zone 구성에 맞는 모니터링과 보안 관제를 구성합니다.  
 
