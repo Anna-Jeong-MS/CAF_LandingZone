@@ -8,6 +8,7 @@
 
 ### 👩‍💻Monitoring
 
+Azure 상에 있는 다양한 리소스들에 대한(Azure 플랫폼, VM, 네트워크 etc) 모니터링을 구현합니다.
 
 ## Day 2
 
