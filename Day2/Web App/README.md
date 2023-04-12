@@ -33,7 +33,7 @@ App Service는 App Service Plan(가격 책정 플랜)에 따라 multi-tenant 형
 
 ## 도전과제
 
-### 1. 웹 앱 배포
+### 1-1. 웹 앱 배포(zip 배포)
 
 첫 배포는 테스트용이기 때문에 zip 파일로 배포합니다. 추후 운영 우수성을 위해 Azure DevOps를 사용할 때는 다른 방식을 사용합니다. 
 
@@ -60,7 +60,7 @@ App Service는 App Service Plan(가격 책정 플랜)에 따라 multi-tenant 형
     pip install -r requirements.txt && python -m uvicorn main:app --host 0.0.0.0
     ```
     
-    ![Untitled](images/Untitled%204.png)
+    ![Untitled](images/image16.png)
     
 4. **코드 zip파일 다운 받기**
     
@@ -70,14 +70,17 @@ App Service는 App Service Plan(가격 책정 플랜)에 따라 multi-tenant 형
     1) zip file unzip
     
     2) **파일 새로 압축**
-    
-    Github에서 다운 받은 zip은 폴더 구조가 이중으로 되어 있어서 그대로 업로드하게 되면 App Service에서 폴더 구조를 인식할 수 없습니다. 꼭 폴더를 압축 해제 한 후 새롭게 압축 해주세요.
+    <br>
+
+    **Github에서 다운 받은 zip은 폴더 구조가 이중으로 되어 있어서 그대로 업로드하게 되면 App Service에서 폴더 구조를 인식할 수 없습니다.** **꼭 폴더를 압축 해제 한 후 새롭게 압축 해주세요.**
+    <br>
     
     ![Untitled](images/Untitled%205.png)
     
 5. **Cloud Shell에 zip파일 업로드**
     
     ![Untitled](images/Untitled%206.png)
+    <br>
     
 6. **zip파일로 Web App  배포**
     
@@ -85,7 +88,7 @@ App Service는 App Service Plan(가격 책정 플랜)에 따라 multi-tenant 형
     az webapp deploy \
     		--resource-group $RESOURCE_GROUP_NAME \
     		--name $APP_SERVICE_NAME \
-    		--src $ZIP_FILE
+    		--src-path $ZIP_FILE --type zip
     ```
     
 7. **배포 확인**
@@ -93,12 +96,21 @@ App Service는 App Service Plan(가격 책정 플랜)에 따라 multi-tenant 형
     ![Untitled](images/Untitled%207.png)
     
 - 에러 발생 시
-    1. Portal 내의 `‘고급 도구’`로 wwwroot에 zip 파일 내와 동일한 구조로 정상 배포되었는지 확인
-        
-        ![Untitled](images/Untitled%208.png)
-        
-    2. Portal내의 `모니터링 > 로그 스트림` 으로 Error 탐색
-        - uvicorn not found error ⇒ 가상 환경 activate가 안된 것. 1번의 고급 도구로 wwwroot 다시 확인
+    Portal내의 `모니터링 > 로그 스트림` 으로 Error 탐색
+
+    ![image13](images/image13.png)
+
+  - uvicorn not found error ⇒ 가상 환경 activate가 안된 것. 1번의 고급 도구로 wwwroot 다시 확인
+
+
+### 1-2. 웹 앱 배포(Bicep)
+
+[Bicep code Repo Link](https://github.com/n-y-kim/TodoApp-bicep)에서 bicep 파일을 통해 웹앱을 배포합니다.
+
+**배포 확인**
+    
+![Untitled](images/Untitled%207.png)
+    
 
 ### 2. VNet & Subnet 생성
 
@@ -120,10 +132,16 @@ App Service는 별도의 Subnet 연결을 통해 다른 Subnet에 배포된 리�
 - IP 주소: `10.1.2.0/24`
 
 ### 3. SQL DB 만들기
+> SQL Server ➡️ SQL DB ➡️ Private Endpoint 생성 순으로 진행
 
-SQL 서버를 생성하고 해당 서버에 `appservicedb` 라는 데이터베이스를 배포합니다. 
+![Untitled](images/image14.png)
 
-서버를 배포할 때는 서버 관리자 이름과 비밀번호 형식으로 접근할 수 있도록 SQL 인증을 사용합니다. 
+1. SQL **Server** 생성
+Portal 검색창에 'sql' 검색하여 sql server 선택.
+서버를 배포할 때는 서버 관리자 이름과 비밀번호 형식으로 접근할 수 있도록 **SQL 인증을 사용**합니다.
+   
+2. SQL **DB** 생성(DB 이름 - **appservicedb**)
+SQL 서버를 생성하고 해당 서버에 `appservicedb` 라는 데이터베이스를 배포합니다.  
 
 ### 4. SQL DB 연결 with Private Endpoint
 
@@ -139,6 +157,8 @@ SQL 서버를 생성하고 해당 서버에 `appservicedb` 라는 데이터베�
 ## 테스트
 
 1. **Web App에서 DB 연결** - endpoint url, admin name, pwd
+    endpoint url 확인:
+    ![image15](images/image15.png)
 2. **ToDo 추가하기**
     
     ![Untitled](images/Untitled%2011.png)
